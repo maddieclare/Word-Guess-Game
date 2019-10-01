@@ -1,7 +1,7 @@
-// array containing all possible words to be guessed
+// all possible words to be guessed
 var listOfWords = ["halloween", "ghost", "vampire", "werewolf", "monster", "haunted", "poltergeist", "demon", "possession", "skeleton"];
 
-// wordToBeGuessed and playerGuess variables need declaring outside of their functions
+// wordToBeGuessed and playerGuess need declaring outside of their functions
 var wordToBeGuessed;
 var playerGuess;
 
@@ -27,7 +27,7 @@ function getStats() {
     "Your guesses so far: " + lettersAlreadyGuessed;
 }
 
-// selects item at random from listOfWords array
+// selects item at random from listOfWords
 function randomWordSelection() {
     wordToBeGuessed = listOfWords[Math.floor(Math.random() * listOfWords.length)];
     console.log(wordToBeGuessed);
@@ -41,6 +41,12 @@ function letterGuessedMoreThanOnce() {
 // prevents any non-alphabetical key from being counted as a guess
 function inputIsNotALetter() {
     alert("Please choose a valid letter.");
+}
+
+// pushes valid player guesses to lettersAlreadyGuessed and decreases numberOfGuessesLeft by 1
+function letterTrack() {
+    lettersAlreadyGuessed.push(" " + playerGuess);
+    numberOfGuessesLeft -= 1;
 }
 
 getStats();
