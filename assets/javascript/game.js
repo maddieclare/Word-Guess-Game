@@ -49,5 +49,21 @@ function letterTrack() {
     numberOfGuessesLeft -= 1;
 }
 
+// player lose condition
+function playerLoss() {
+    alert("You lose :(");
+    playerLosses += 1;
+    lettersAlreadyGuessed = [];
+    numberOfGuessesLeft = 9;
+}
+  
+// player win condition
+function playerWin() {
+    alert("You win!");
+    playerWins += 1;
+    lettersAlreadyGuessed = [];
+    numberOfGuessesLeft = 9;
+}
+
 getStats();
 
