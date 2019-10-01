@@ -31,7 +31,17 @@ function getStats() {
 function randomWordSelection() {
     wordToBeGuessed = listOfWords[Math.floor(Math.random() * listOfWords.length)];
     console.log(wordToBeGuessed);
-  }
+}
+
+// prevents player from guessing the same letter twice
+function letterGuessedMoreThanOnce() {
+    alert("You've already guessed that letter!");
+}
+  
+// prevents any non-alphabetical key from being counted as a guess
+function inputIsNotALetter() {
+    alert("Please choose a valid letter.");
+}
 
 getStats();
 
