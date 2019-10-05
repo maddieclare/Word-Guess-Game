@@ -1,25 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <meta charset="UTF-8" />
+  <meta
+    charset="UTF-8"
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
   <head>
     <title>Hangman</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
     <div id="game">
-      <h1>Hangman</h1>
+      <div class="row">
+        <div class="col-md-3 spooky-text">
+          <p><span id="playerWins"></span></p>
+        </div>
+        <div class="col-md-6 spooky-title">
+          <h1>SPOOKY HANGMAN</h1>
+          <p>Pick a letter, any letter...</p>
+        </div>
+        <div class="col-md-3 spooky-text">
+          <p><span id="playerLosses"></span></p>
+        </div>
+      </div>
 
-      <p>Press any key to get started!</p>
-
-      <p><span id="playerWins"></span></p>
-
-      <p><span id="playerLosses"></span></p>
-
-      <p><span id="wordToBeGuessed"></span></p>
-
-      <p><span id="numberOfGuessesLeft"></span></p>
-
-      <p><span id="lettersAlreadyGuessed"></span></p>
+      <div class="row game-box">
+        <div class="col-md-2 spooky-text">
+          <!-- Blank row for formatting -->
+        </div>
+        <div class="col-md-8 spooky-text">
+          <h4><span id="wordToBeGuessed"></span></h4>
+          <br />
+          <p><span id="numberOfGuessesLeft"></span></p>
+          <p><span id="lettersAlreadyGuessed"></span></p>
+        </div>
+        <div class="col-md-2 spooky-text">
+          <!-- Blank row for formatting -->
+        </div>
+      </div>
     </div>
 
     <script src="assets/javascript/game.js"></script>

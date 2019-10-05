@@ -94,7 +94,7 @@ function trackLettersGuessed() {
 
 // decreases numberOfGuessesLeft by 1
 function decreaseNumberOfGuesses() {
-    numberOfGuessesLeft--;
+  numberOfGuessesLeft--;
 }
 
 // player lose condition
@@ -120,14 +120,14 @@ function reset() {
 
 // for variable logging in HTML
 function getStats() {
-    document.getElementById("playerWins").innerHTML = "Wins: " + playerWins;
-    document.getElementById("playerLosses").innerHTML = "Losses: " + playerLosses;
-    document.getElementById("wordToBeGuessed").innerHTML =
-      "Current word: " + hiddenWord;
-    document.getElementById("numberOfGuessesLeft").innerHTML =
-      "Number of guesses remaining: " + numberOfGuessesLeft;
-    document.getElementById("lettersAlreadyGuessed").innerHTML =
-      "Your guesses so far: " + lettersAlreadyGuessed;
+  document.getElementById("playerWins").innerHTML = "Wins: " + playerWins;
+  document.getElementById("playerLosses").innerHTML = "Losses: " + playerLosses;
+  document.getElementById("wordToBeGuessed").innerHTML =
+    "Current word: </br></br>" + hiddenWord.join(" ");
+  document.getElementById("numberOfGuessesLeft").innerHTML =
+    "Number of guesses remaining: </br>" + numberOfGuessesLeft;
+  document.getElementById("lettersAlreadyGuessed").innerHTML =
+    "Your guesses so far: </br>" + lettersAlreadyGuessed;
 }
 
 randomWordSelection();
@@ -150,7 +150,6 @@ document.onkeyup = function(selection) {
     trackLettersGuessed();
     decreaseNumberOfGuesses();
   }
- 
 
   if (numberOfGuessesLeft == 0) {
     playerLoss();

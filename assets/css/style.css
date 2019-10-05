@@ -1,0 +1,31 @@
+body {
+  background-color: #000000;
+  background-image: url("../images/background.png");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.spooky-title {
+  text-align: center;
+  font-family: "Press Start 2P", cursive;
+  color: #ffffff;
+  padding: 50px 0px 0px 0px;
+  line-height: 50px;
+}
+
+.spooky-text {
+  text-align: center;
+  font-family: "Press Start 2P", cursive;
+  color: #ffffff;
+  line-height: 40px;
+  padding: 40px;
+}
+
+.game-box {
+  margin-top: 30px;
+  position: fixed;
+  left: 20%;
+  right: 20%;
+  border-top: 5px dashed #ffffff;
+  min-height: 45vh;
+}
