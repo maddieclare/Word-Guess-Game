@@ -1,159 +1,124 @@
-// letters of the alphabet
-var alphabet = "abcdefghijklmnopqrstuvwxyz";
+// VARIABLES
+// randomly selected word for guessing
+let wordToBeGuessed;
 
-// all possible words to be guessed
-var listOfWords = [
-  "halloween",
-  "vampire",
-  "werewolf",
-  "omen",
-  "haunted",
-  "graveyard",
-  "superstition",
-  "occult",
-  "skull",
-  "tomb",
-  "supernatural",
-  "phantom",
-  "poltergeist",
-  "broomstick",
-  "crypt",
-  "nightmare",
-  "cobwebs",
-  "demonic",
-  "skeleton",
-  "zombie",
-  "spectre",
-  "midnight",
-  "apparition",
-  "cemetery",
-  "cauldron"
-];
-
-// these variables need declaring outside of their functions
-var wordToBeGuessed;
-var playerGuess;
-var hiddenWord = [];
+// for displaying guessed/hidden letters in html
+let hiddenWord = [];
 
 // array tracking letters player has previously guessed
-var lettersAlreadyGuessed = [];
+let lettersAlreadyGuessed = [];
 
 // variable tracking number of player guesses remaining
-var numberOfGuessesLeft = 12;
+let numberOfGuessesLeft = 12;
 
-// variable tracking player wins
-var playerWins = 0;
+// win/loss tracking
+let latestResult;
+let playerWins = 0;
+let playerLosses = 0;
 
-// variable tracking player losses
-var playerLosses = 0;
+// LOGIC
+$(document).ready(function() {
+  setInterval(blinkText, 1000);
+  initialiseGame();
+});
 
-// displays number of underscores corresponding with length of wordToBeGuessed
-function hideWord() {
-  for (var i = 0; i < wordToBeGuessed.length; i++) {
-    hiddenWord.push("_");
-  }
+// FUNCTIONS
+function initialiseGame() {
+  $(document).off();
+  showStartScreen();
+  randomWordSelection();
+  getStats();
 }
 
-// selects item at random from listOfWords
+function awaitUserStart() {
+  $(document).keyup(function() {
+    showGameScreen();
+    $(document).off();
+    awaitUserGuess();
+  });
+}
+
 function randomWordSelection() {
   wordToBeGuessed = listOfWords[Math.floor(Math.random() * listOfWords.length)];
+  hideWord();
 }
 
-// reveals correctly guessed letter
-function showHiddenLetter() {
-  // where the number contained in variable (i) is less than the length of the word to bo guessed, (i) increases by 1 each loop
-  for (var i = 0; i < wordToBeGuessed.length; i++) {
-    // for each loop, if the character located at (i) in wordToBeGuessed is equal to the playerGuess...
-    if (wordToBeGuessed.charAt(i) == playerGuess) {
-      // ...the equivalent index in the hidden word array changes to match the letter guessed by the player
-      hiddenWord[i] = playerGuess;
-    }
-  }
+function awaitUserGuess() {
+  $(document).keyup(function(selection) {
+    let playerGuess = selection.key.toLowerCase();
+    determineRoundOutcome(playerGuess);
+  });
 }
 
-// prevents player from guessing the same letter twice
-function letterGuessedMoreThanOnce() {
-  alert("You've already guessed that letter!");
-}
-
-// prevents any non-alphabetical key from being counted as a guess
-function inputIsNotALetter() {
-  alert("Please choose a valid letter.");
-}
-
-// pushes valid player guesses to lettersAlreadyGuessed
-function trackLettersGuessed() {
-  lettersAlreadyGuessed.push(playerGuess);
-}
-
-// decreases numberOfGuessesLeft by 1
-function decreaseNumberOfGuesses() {
-  numberOfGuessesLeft--;
-}
-
-// player lose condition
-function playerLoss() {
-  alert("You lose :(");
-  playerLosses += 1;
-}
-
-// player win condition
-function playerWin() {
-  alert("You win!");
-  playerWins += 1;
-}
-
-// resets hiddenWord
-function reset() {
-  numberOfGuessesLeft = 12;
-  lettersAlreadyGuessed = [];
-  hiddenWord = [];
-}
-
-// for variable logging in HTML
-function getStats() {
-  document.getElementById("playerWins").innerHTML = "Wins: " + playerWins;
-  document.getElementById("playerLosses").innerHTML = "Losses: " + playerLosses;
-  document.getElementById("wordToBeGuessed").innerHTML =
-    "Current word: </br></br>" + hiddenWord.join(" ");
-  document.getElementById("numberOfGuessesLeft").innerHTML =
-    "Number of guesses remaining: </br>" + numberOfGuessesLeft;
-  document.getElementById("lettersAlreadyGuessed").innerHTML =
-    "Your guesses so far: </br>" + lettersAlreadyGuessed;
-}
-
-randomWordSelection();
-
-hideWord();
-
-getStats();
-
-document.onkeyup = function(selection) {
-  playerGuess = selection.key.toLowerCase();
-
+function determineRoundOutcome(playerGuess) {
   if (alphabet.indexOf(playerGuess) == -1) {
     inputIsNotALetter();
   } else if (lettersAlreadyGuessed.indexOf(playerGuess) !== -1) {
     letterGuessedMoreThanOnce();
   } else if (wordToBeGuessed.indexOf(playerGuess) !== -1) {
-    showHiddenLetter();
-    trackLettersGuessed();
+    showHiddenLetter(playerGuess);
+    trackLettersGuessed(playerGuess);
   } else {
-    trackLettersGuessed();
+    trackLettersGuessed(playerGuess);
     decreaseNumberOfGuesses();
   }
 
   if (numberOfGuessesLeft == 0) {
     playerLoss();
-    reset();
-    randomWordSelection();
-    hideWord();
+    resetStats();
   } else if (hiddenWord.indexOf("_") == -1) {
     playerWin();
-    reset();
-    randomWordSelection();
-    hideWord();
+    resetStats();
   }
 
   getStats();
-};
+}
+
+function trackLettersGuessed(playerGuess) {
+  lettersAlreadyGuessed.push(playerGuess);
+}
+
+function decreaseNumberOfGuesses(playerGuess) {
+  numberOfGuessesLeft--;
+}
+
+function letterGuessedMoreThanOnce() {
+  alert("You've already guessed that letter!");
+}
+
+function inputIsNotALetter() {
+  alert("Please choose a valid letter.");
+}
+
+function playerLoss() {
+  $(document).off();
+  playerLosses += 1;
+  latestResult = "lose";
+  showResultsScreen(latestResult);
+  awaitRestartInput();
+}
+
+function playerWin() {
+  $(document).off();
+  playerWins += 1;
+  latestResult = "win";
+  showResultsScreen(latestResult);
+  awaitRestartInput();
+}
+
+function awaitRestartInput() {
+  $(document).keyup(function(selection) {
+    let playAgain = selection.originalEvent.key.toUpperCase();
+    if (playAgain == "Y") {
+      initialiseGame();
+    } else if (playAgain == "N") {
+      showEndGameScreen();
+    }
+  });
+}
+
+function resetStats() {
+  numberOfGuessesLeft = 12;
+  lettersAlreadyGuessed = [];
+  hiddenWord = [];
+}

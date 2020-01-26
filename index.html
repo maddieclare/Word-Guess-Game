@@ -7,14 +7,18 @@
   />
   <head>
     <title>Hangman</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- JQUERY -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- BOOTSTRAP -->
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <!-- CUSTOM CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <!-- GOOGLE FONTS -->
     <link
       href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap"
       rel="stylesheet"
@@ -22,36 +26,93 @@
   </head>
 
   <body>
-    <div id="game">
+    <header id="spooky-header">
       <div class="row">
-        <div class="col-md-3 spooky-text">
-          <p><span id="playerWins"></span></p>
-        </div>
-        <div class="col-md-6 spooky-title">
-          <h1>SPOOKY HANGMAN</h1>
-          <p>Pick a letter, any letter...</p>
-        </div>
-        <div class="col-md-3 spooky-text">
-          <p><span id="playerLosses"></span></p>
+        <div class="col-md-12">
+          <h1 class="spooky-font">SPOOKY WORD GUESS GAME</h1>
         </div>
       </div>
+    </header>
 
-      <div class="row game-box">
-        <div class="col-md-2 spooky-text">
-          <!-- Blank row for formatting -->
+    <!-- START PAGE -->
+    <section id="press-start">
+      <div class="row">
+        <div class="col-md-3">
+          <!-- BLANK ROW -->
         </div>
-        <div class="col-md-8 spooky-text">
-          <h4><span id="wordToBeGuessed"></span></h4>
+        <div class="col-md-6">
+          <p class="flashing-text spooky-font">Press any key to start...</p>
+        </div>
+        <div class="col-md-3">
+          <!-- BLANK ROW -->
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN GAME SECTION -->
+    <section id="game">
+      <div class="row">
+        <div class="col-md-2">
+          <!-- BLANK ROW -->
+        </div>
+        <div class="col-md-8 spooky-font" id="main-game">
+          <h4>
+            <span id="current-word">
+              <!-- CURRENT HIDDEN WORD GOES HERE -->
+            </span>
+          </h4>
           <br />
-          <p><span id="numberOfGuessesLeft"></span></p>
-          <p><span id="lettersAlreadyGuessed"></span></p>
+          <p>
+            <span id="guess-countdown">
+              <!-- GUESS COUNTDOWN GOES HERE -->
+            </span>
+          </p>
+          <p>
+            <span id="already-guessed">
+              <!-- LETTER TRACKING HERE -->
+            </span>
+          </p>
         </div>
-        <div class="col-md-2 spooky-text">
-          <!-- Blank row for formatting -->
+        <div class="col-md-2">
+          <!-- BLANK ROW -->
         </div>
       </div>
-    </div>
+    </section>
 
+    <!-- WIN/LOSE SCREEN -->
+    <section id="results">
+      <div class="row spooky-font">
+        <div class="col-md-2">
+          <!-- BLANK ROW -->
+        </div>
+        <div class="col-md-8">
+          <h4 id="win-or-lose"></h4>
+          <br />
+          <p>Play again? (y/n)</p>
+        </div>
+        <div class="col-md-2">
+          <!-- BLANK ROW -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SCORES -->
+    <footer class="footer spooky-font" id="scores">
+      <div class="row">
+        <div class="col-md-6">
+          <span id="wins">
+            <!-- WIN COUNT HERE -->
+          </span>
+        </div>
+        <div class="col-md-6">
+          <span id="losses">
+            <!-- LOSS COUNT HERE -->
+          </span>
+        </div>
+      </div>
+    </footer>
+    <script src="assets/javascript/views.js"></script>
+    <script src="assets/javascript/words.js"></script>
     <script src="assets/javascript/game.js"></script>
   </body>
 </html>

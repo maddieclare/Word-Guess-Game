@@ -5,27 +5,37 @@ body {
   background-size: cover;
 }
 
-.spooky-title {
+#spooky-header {
+  height: 20vh;
+  margin: 3% 0% 0% 0%;
   text-align: center;
-  font-family: "Press Start 2P", cursive;
-  color: #ffffff;
-  padding: 50px 0px 0px 0px;
-  line-height: 50px;
 }
 
-.spooky-text {
-  text-align: center;
+.spooky-font {
   font-family: "Press Start 2P", cursive;
   color: #ffffff;
-  line-height: 40px;
-  padding: 40px;
 }
 
-.game-box {
-  margin-top: 30px;
-  position: fixed;
-  left: 20%;
-  right: 20%;
-  border-top: 5px dashed #ffffff;
-  min-height: 45vh;
+#press-start {
+  text-align: center;
+  margin: 10% 0% 0% 0%;
+}
+
+#main-game {
+  margin: 4% 0% 0% 0%;
+  text-align: center;
+}
+
+#results {
+  text-align: center;
+  margin: 7% 0% 0% 0%;
+}
+
+#scores {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
 }
